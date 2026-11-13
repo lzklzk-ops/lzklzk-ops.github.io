@@ -1,1 +1,179 @@
-!function(t,e){"use strict";if(t.FOMAL_SNOW)t.FOMAL_SNOW.refresh();else{var n=null,a=null,i=null,r=!1,o=!1,l=0,h=0,d=1,u=0,s=null,c=0,f=[],m=[],M=[],v=0,g=null,p="function"==typeof t.matchMedia?t.matchMedia("(prefers-reduced-motion: reduce)"):null,y=/phone|pad|pod|iPhone|iPod|iPad|Android|Mobile|IEMobile/i.test(t.navigator?t.navigator.userAgent:""),x="function"==typeof t.MutationObserver?new t.MutationObserver(O):null;t.FOMAL_SNOW={refresh:O,reset:function(){L(),O()},inspect:function(){return{running:r,flakes:f.length,depth:m.length?Math.max.apply(null,m):0,maxDepth:u,width:l,height:h}}},"function"==typeof t.MutationObserver&&new t.MutationObserver(O).observe(e.documentElement,{attributes:!0,attributeFilter:["data-theme","class","style"]}),e.addEventListener("visibilitychange",O),e.addEventListener("pjax:complete",O),t.addEventListener("resize",O),t.addEventListener("load",O),e.addEventListener("transitionend",O),e.addEventListener("animationend",O),t.addEventListener("pagehide",(function(){o=!0,b()})),t.addEventListener("pageshow",(function(){o=!1,O()})),t.addEventListener("storage",(function(t){"snow"!==t.key&&null!==t.key||O()})),p&&("function"==typeof p.addEventListener?p.addEventListener("change",O):"function"==typeof p.addListener&&p.addListener(O)),e.body||e.addEventListener("DOMContentLoaded",O,{once:!0}),O()}function b(){c++,r=!1,s=null,null!==i&&"function"==typeof t.cancelAnimationFrame&&t.cancelAnimationFrame(i),i=null}function L(){b(),f=[],m=[],a&&a.clearRect(0,0,l,h)}function E(){if(!n||"none"===n.style.display)return!1;try{return"block"===t.localStorage.getItem("snow")}catch(t){return"block"===n.style.display}}function A(t){var e=1.8+4.8*Math.random();return{x:Math.random()*l,y:t,size:e,speed:16+5*e,phase:Math.random()*Math.PI*2,angle:Math.random()*Math.PI*2,spin:.45*(Math.random()-.5),opacity:.35+.085*e,type:e>=3.8?1:0}}function w(t){var e=Math.max(0,Math.min(m.length-1,t/l*(m.length-1))),n=Math.floor(e),a=Math.min(n+1,m.length-1);return m[n]*(1-e+n)+m[a]*(e-n)}function z(t,e){for(var n=Math.max(0,Math.min(m.length-1,Math.round(t/l*(m.length-1)))),a=-3;a<=3;a++){var i=n+a;i>=0&&i<m.length&&(m[i]=Math.min(u,m[i]+(.9+.16*e)*Math.exp(-a*a/3)))}}function P(){var n=c;i=t.requestAnimationFrame((function(t){n===c&&function(t){if(i=null,!r)return;if(e.hidden||o||p&&p.matches)return void b();var n=null===s?0:Math.max(0,Math.min(.05,(t-s)/1e3));s=t,a.clearRect(0,0,l,h);for(var d=0;d<f.length;d++){var u=f[d];u.phase+=.8*n,u.angle+=u.spin*n,u.x+=(6+10*Math.sin(u.phase))*n,u.y+=u.speed*n,u.x<-u.size&&(u.x=l+u.size),u.x>l+u.size&&(u.x=-u.size),u.y+u.size>=h-w(u.x)?(z(u.x,u.size),f[d]=A(-8-40*Math.random())):(a.save(),a.translate(u.x,u.y),a.rotate(u.angle),a.globalAlpha=u.opacity,a.drawImage(M[u.type],-u.size,-u.size,2*u.size,2*u.size),a.restore())}(function(){if(m.some((function(t){return t>0}))){a.globalAlpha=1,a.fillStyle=g,a.beginPath(),a.moveTo(0,h),a.lineTo(0,h-m[0]);for(var t=1;t<m.length;t++){var e=t*l/(m.length-1),n=h-m[t],i=(t-1)*l/(m.length-1),r=h-m[t-1];a.quadraticCurveTo(i,r,(i+e)/2,(r+n)/2)}a.lineTo(l,h-m[m.length-1]),a.lineTo(l,h),a.closePath(),a.fill()}})(),P()}(t)}))}function O(){!function(){var t=e.getElementById("snow");if(t!==n&&(L(),x&&x.disconnect(),a=null,l=0,h=0,(n=t)&&"function"==typeof n.getContext)){try{a=n.getContext("2d")}catch(t){a=null}x&&x.observe(n,{attributes:!0,attributeFilter:["style","class"]})}}(),E()?!function(){if(!a||!E()||o||e.hidden||y||t.innerWidth<=768||p&&p.matches)return!1;if("dark"===e.documentElement.getAttribute("data-theme"))return!1;if("function"==typeof t.getComputedStyle){var i=t.getComputedStyle(n);if("none"===i.display||"hidden"===i.visibility||"0"===i.opacity)return!1}return"function"==typeof t.requestAnimationFrame}()?b():(!function(){var e=Math.max(1,t.innerWidth),i=Math.max(1,t.innerHeight),r=Math.min(2,Math.max(1,t.devicePixelRatio||1));if(e!==l||i!==h||r!==d){var o=m,s=l,c=h;l=e,h=i,d=r,u=Math.min(30,Math.max(14,.035*h)),n.width=Math.round(l*d),n.height=Math.round(h*d),a.setTransform(d,0,0,d,0,0),m=Array.from({length:Math.ceil(l/16)+1},(function(t,e){var n=o.length>1?Math.round(e*(o.length-1)/Math.ceil(l/16)):0;return Math.min(u,o[n]||0)})),f.forEach((function(t){t.x=s?t.x*l/s:t.x,t.y=c?t.y*h/c:t.y})),(g=a.createLinearGradient(0,h-u,0,h)).addColorStop(0,"rgba(255,255,255,.96)"),g.addColorStop(1,"rgba(220,233,243,.97)")}}(),function(){if(!M.length||v!==d){M=[],v=d;for(var t=0;t<2;t++){var n=e.createElement("canvas");n.width=n.height=40*d;var a=n.getContext("2d");a.scale(d,d),a.translate(20,20),a.strokeStyle="rgba(255,255,255,.96)",a.lineWidth=t?1.8:2.2,a.lineCap="round",a.beginPath();for(var i=0;i<6;i++){var r=i*Math.PI/3,o=Math.cos(r),l=Math.sin(r);if(a.moveTo(0,0),a.lineTo(14*o,14*l),t)for(var h=-1;h<=1;h+=2){var u=Math.cos(r+h*Math.PI/3),s=Math.sin(r+h*Math.PI/3);a.moveTo(8*o,8*l),a.lineTo(8*o-5*u,8*l-5*s)}}a.stroke(),M.push(n)}}}(),function(){var t=Math.max(48,Math.min(96,Math.round(l/16)));for(f.length>t&&(f.length=t);f.length<t;)f.push(A(Math.random()*h-8))}(),r||(r=!0,s=null,P())):L()}}(window,document);
+/* 自然落雪：六臂雪片缓存、时间驱动飘落、有限高度的底部薄积雪。 */
+(function (w, d) {
+  'use strict';
+  if (w.FOMAL_SNOW) { w.FOMAL_SNOW.refresh(); return; }
+  var canvas = null, context = null, raf = null, running = false, away = false;
+  var width = 0, height = 0, ratio = 1, maxDepth = 0, last = null, epoch = 0;
+  var flakes = [], bank = [], sprites = [], spriteRatio = 0, groundGradient = null;
+  var reduced = typeof w.matchMedia === 'function' ? w.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  var mobile = /phone|pad|pod|iPhone|iPod|iPad|Android|Mobile|IEMobile/i.test(w.navigator ? w.navigator.userAgent : '');
+  var canvasObserver = typeof w.MutationObserver === 'function' ? new w.MutationObserver(refresh) : null;
+  function stop() {
+    epoch++; running = false; last = null;
+    if (raf !== null && typeof w.cancelAnimationFrame === 'function') w.cancelAnimationFrame(raf);
+    raf = null;
+  }
+  function clear() {
+    stop(); flakes = []; bank = [];
+    if (context) context.clearRect(0, 0, width, height);
+  }
+  function bind() {
+    var next = d.getElementById('snow');
+    if (next === canvas) return;
+    clear(); if (canvasObserver) canvasObserver.disconnect();
+    canvas = next; context = null; width = 0; height = 0;
+    if (canvas && typeof canvas.getContext === 'function') {
+      try { context = canvas.getContext('2d'); } catch (error) { context = null; }
+      if (canvasObserver) canvasObserver.observe(canvas, { attributes: true, attributeFilter: ['style', 'class'] });
+    }
+  }
+  function enabled() {
+    if (!canvas || canvas.style.display === 'none') return false;
+    try { return w.localStorage.getItem('snow') === 'block'; }
+    catch (error) { return canvas.style.display === 'block'; }
+  }
+  function visible() {
+    if (!context || !enabled() || away || d.hidden || mobile || w.innerWidth <= 768 || (reduced && reduced.matches)) return false;
+    if (d.documentElement.getAttribute('data-theme') === 'dark') return false;
+    if (typeof w.getComputedStyle === 'function') {
+      var style = w.getComputedStyle(canvas);
+      if (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0') return false;
+    }
+    return typeof w.requestAnimationFrame === 'function';
+  }
+  function measure() {
+    var newWidth = Math.max(1, w.innerWidth), newHeight = Math.max(1, w.innerHeight);
+    var newRatio = Math.min(2, Math.max(1, w.devicePixelRatio || 1));
+    if (newWidth === width && newHeight === height && newRatio === ratio) return;
+    var oldBank = bank, oldWidth = width, oldHeight = height;
+    width = newWidth; height = newHeight; ratio = newRatio;
+    maxDepth = Math.min(30, Math.max(14, height * 0.035));
+    canvas.width = Math.round(width * ratio); canvas.height = Math.round(height * ratio);
+    context.setTransform(ratio, 0, 0, ratio, 0, 0);
+    bank = Array.from({ length: Math.ceil(width / 16) + 1 }, function (_, i) {
+      var oldIndex = oldBank.length > 1 ? Math.round(i * (oldBank.length - 1) / Math.ceil(width / 16)) : 0;
+      return Math.min(maxDepth, oldBank[oldIndex] || 0);
+    });
+    flakes.forEach(function (flake) {
+      flake.x = oldWidth ? flake.x * width / oldWidth : flake.x;
+      flake.y = oldHeight ? flake.y * height / oldHeight : flake.y;
+    });
+    groundGradient = context.createLinearGradient(0, height - maxDepth, 0, height);
+    groundGradient.addColorStop(0, 'rgba(255,255,255,.96)');
+    groundGradient.addColorStop(1, 'rgba(220,233,243,.97)');
+  }
+  function createSprites() {
+    if (sprites.length && spriteRatio === ratio) return;
+    sprites = []; spriteRatio = ratio;
+    // 小雪片是细晶，大雪片增加分枝；缓存后每帧只贴图，不重复生成几何。
+    for (var type = 0; type < 2; type++) {
+      var sprite = d.createElement('canvas'); sprite.width = sprite.height = 40 * ratio;
+      var ctx = sprite.getContext('2d'); ctx.scale(ratio, ratio); ctx.translate(20, 20);
+      ctx.strokeStyle = 'rgba(255,255,255,.96)'; ctx.lineWidth = type ? 1.8 : 2.2; ctx.lineCap = 'round';
+      ctx.beginPath();
+      for (var arm = 0; arm < 6; arm++) {
+        var angle = arm * Math.PI / 3, x = Math.cos(angle), y = Math.sin(angle);
+        ctx.moveTo(0, 0); ctx.lineTo(x * 14, y * 14);
+        if (type) {
+          for (var branch = -1; branch <= 1; branch += 2) {
+            var bx = Math.cos(angle + branch * Math.PI / 3), by = Math.sin(angle + branch * Math.PI / 3);
+            ctx.moveTo(x * 8, y * 8); ctx.lineTo(x * 8 - bx * 5, y * 8 - by * 5);
+          }
+        }
+      }
+      ctx.stroke(); sprites.push(sprite);
+    }
+  }
+  function flake(y) {
+    var size = 1.8 + Math.random() * 4.8;
+    return { x: Math.random() * width, y: y, size: size, speed: 16 + size * 5,
+      phase: Math.random() * Math.PI * 2, angle: Math.random() * Math.PI * 2,
+      spin: (Math.random() - .5) * .45, opacity: .35 + size * .085, type: size >= 3.8 ? 1 : 0 };
+  }
+  function seed() {
+    var count = Math.max(48, Math.min(96, Math.round(width / 16)));
+    if (flakes.length > count) flakes.length = count;
+    while (flakes.length < count) flakes.push(flake(Math.random() * height - 8));
+  }
+  function depthAt(x) {
+    var index = Math.max(0, Math.min(bank.length - 1, x / width * (bank.length - 1)));
+    var base = Math.floor(index), next = Math.min(base + 1, bank.length - 1);
+    return bank[base] * (1 - index + base) + bank[next] * (index - base);
+  }
+  function deposit(x, size) {
+    var center = Math.max(0, Math.min(bank.length - 1, Math.round(x / width * (bank.length - 1))));
+    for (var offset = -3; offset <= 3; offset++) {
+      var index = center + offset;
+      if (index >= 0 && index < bank.length) {
+        bank[index] = Math.min(maxDepth, bank[index] + (0.9 + size * .16) * Math.exp(-offset * offset / 3));
+      }
+    }
+  }
+  function drawBank() {
+    if (!bank.some(function (depth) { return depth > 0; })) return;
+    context.globalAlpha = 1; context.fillStyle = groundGradient;
+    context.beginPath(); context.moveTo(0, height); context.lineTo(0, height - bank[0]);
+    for (var i = 1; i < bank.length; i++) {
+      var x = i * width / (bank.length - 1), y = height - bank[i];
+      var previousX = (i - 1) * width / (bank.length - 1), previousY = height - bank[i - 1];
+      context.quadraticCurveTo(previousX, previousY, (previousX + x) / 2, (previousY + y) / 2);
+    }
+    context.lineTo(width, height - bank[bank.length - 1]); context.lineTo(width, height);
+    context.closePath(); context.fill();
+  }
+  function schedule() {
+    var ticket = epoch;
+    raf = w.requestAnimationFrame(function (time) {
+      if (ticket !== epoch) return; // 取消后的旧回调不能影响新一轮动画。
+      frame(time);
+    });
+  }
+  function frame(time) {
+    raf = null;
+    if (!running) return;
+    if (d.hidden || away || (reduced && reduced.matches)) { stop(); return; }
+    var dt = last === null ? 0 : Math.max(0, Math.min(.05, (time - last) / 1000)); last = time;
+    context.clearRect(0, 0, width, height);
+    for (var i = 0; i < flakes.length; i++) {
+      var f = flakes[i]; f.phase += dt * .8; f.angle += f.spin * dt;
+      f.x += (6 + Math.sin(f.phase) * 10) * dt; f.y += f.speed * dt;
+      if (f.x < -f.size) f.x = width + f.size;
+      if (f.x > width + f.size) f.x = -f.size;
+      if (f.y + f.size >= height - depthAt(f.x)) {
+        deposit(f.x, f.size); flakes[i] = flake(-8 - Math.random() * 40); continue;
+      }
+      context.save(); context.translate(f.x, f.y); context.rotate(f.angle); context.globalAlpha = f.opacity;
+      context.drawImage(sprites[f.type], -f.size, -f.size, f.size * 2, f.size * 2); context.restore();
+    }
+    drawBank(); schedule();
+  }
+  function refresh() {
+    bind();
+    if (!enabled()) { clear(); return; }
+    if (!visible()) { stop(); return; }
+    measure(); createSprites(); seed();
+    if (!running) { running = true; last = null; schedule(); }
+  }
+  function reset() { clear(); refresh(); }
+  w.FOMAL_SNOW = { refresh: refresh, reset: reset, inspect: function () {
+    return { running: running, flakes: flakes.length, depth: bank.length ? Math.max.apply(null, bank) : 0,
+      maxDepth: maxDepth, width: width, height: height };
+  } };
+  if (typeof w.MutationObserver === 'function') {
+    new w.MutationObserver(refresh).observe(d.documentElement, { attributes: true, attributeFilter: ['data-theme', 'class', 'style'] });
+  }
+  d.addEventListener('visibilitychange', refresh); d.addEventListener('pjax:complete', refresh);
+  w.addEventListener('resize', refresh);
+  w.addEventListener('load', refresh); // 样式/首屏资源就绪后再次判断，不靠轮询。
+  d.addEventListener('transitionend', refresh);
+  d.addEventListener('animationend', refresh);
+  w.addEventListener('pagehide', function () { away = true; stop(); });
+  w.addEventListener('pageshow', function () { away = false; refresh(); });
+  w.addEventListener('storage', function (event) { if (event.key === 'snow' || event.key === null) refresh(); });
+  if (reduced) {
+    if (typeof reduced.addEventListener === 'function') reduced.addEventListener('change', refresh);
+    else if (typeof reduced.addListener === 'function') reduced.addListener(refresh);
+  }
+  if (!d.body) d.addEventListener('DOMContentLoaded', refresh, { once: true });
+  refresh();
+})(window, document);

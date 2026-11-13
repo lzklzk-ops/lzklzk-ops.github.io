@@ -6,7 +6,7 @@
   <link href="https://lzklzk-ops.github.io/atom.xml" rel="self"/>
   
   <link href="https://lzklzk-ops.github.io/"/>
-  <updated>2026-10-02T02:00:00.000Z</updated>
+  <updated>2026-11-11T02:00:00.000Z</updated>
   <id>https://lzklzk-ops.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>这是我的第一篇文章</title>
+    <link href="https://lzklzk-ops.github.io/posts/d1db7794.html"/>
+    <id>https://lzklzk-ops.github.io/posts/d1db7794.html</id>
+    <published>2026-11-11T02:00:00.000Z</published>
+    <updated>2026-11-11T02:00:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="我原来又变帅了">我原来又变帅了</h2><p>终于找到一家头发剪的好的理发店了</p>]]></content>
+    
+    
+    <summary type="html">小突破</summary>
+    
+    
+    
+    <category term="技术" scheme="https://lzklzk-ops.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="帅" scheme="https://lzklzk-ops.github.io/tags/%E5%B8%85/"/>
+    
+    <category term="无敌" scheme="https://lzklzk-ops.github.io/tags/%E6%97%A0%E6%95%8C/"/>
+    
+  </entry>
   
   <entry>
     <title>外挂标签速查</title>

@@ -1,1 +1,89 @@
-!function(e,t){"use strict";if(e.FOMAL_FIREFLIES)e.FOMAL_FIREFLIES.refresh();else{var n=null,r=0,o=!1,a=!1,d=Object.create(null),i="function"==typeof e.matchMedia?e.matchMedia("(prefers-reduced-motion: reduce)"):null;e.FOMAL_FIREFLIES={setEnabled:p,refresh:u,syncControls:f},t.addEventListener("visibilitychange",y),t.addEventListener("pjax:complete",u),e.addEventListener("resize",y),e.addEventListener("pagehide",(function(){a=!0,y()})),e.addEventListener("pageshow",(function(){a=!1,u()})),e.addEventListener("storage",(function(e){null!==e.key&&"fireflies"!==e.key&&"snow"!==e.key||(null===e.key?d=Object.create(null):delete d[e.key],"snow"===e.key&&"block"===s("snow","none")?p(!1):u())})),i&&("function"==typeof i.addEventListener?i.addEventListener("change",y):"function"==typeof i.addListener&&i.addListener(y)),t.body||t.addEventListener("DOMContentLoaded",u,{once:!0}),u()}function s(t,n){if(Object.prototype.hasOwnProperty.call(d,t))return d[t];try{var r=e.localStorage.getItem(t);return null===r?"fireflies"===t?"0":n:r}catch(e){return n}}function l(t,n){try{e.localStorage.setItem(t,n),delete d[t]}catch(e){d[t]=n}}function c(){n&&n.parentNode&&n.parentNode.removeChild(n),n=null,r=0}function f(){var e=t.getElementById("firefliesSet");e&&(e.checked=o);var n=!o&&"block"===s("snow","none"),r=t.getElementById("snowSet");r&&(r.checked=n);var a=t.getElementById("snow");a&&a.style.display!==(n?"block":"none")&&(a.style.display=n?"block":"none");var d=t.getElementById("firefliesHint");d&&(d.textContent=o&&i&&i.matches?"已开启 · 减少动态效果偏好下暂停":"下方微光 · 默认关闭 · 与雪花互斥")}function y(){if(!o)return c(),void f();!function(){"block"===s("snow","none")&&l("snow","none");var e=t.getElementById("snow");e&&(e.style.display="none");var n=t.getElementById("snowSet");n&&(n.checked=!1)}();var d=a||t.hidden||!(!i||!i.matches);n&&n.parentNode!==t.body&&(n=null,r=0);var y=e.innerWidth<=600?8:14;if(!d&&t.body&&(!n||r!==y)){c(),(n=t.createElement("div")).id="fireflies-stage",n.setAttribute("aria-hidden","true"),n.setAttribute("role","presentation");for(var u=0;u<y;u++){var p=t.createElement("span"),h=t.createElement("i");p.className="ff-mote",h.className="ff-glow",p.style.left=3+90*u/y+4*Math.random()+"%",p.style.top=12+70*Math.random()+"%",p.style.setProperty("--ff-drift-time",(20+14*Math.random()).toFixed(2)+"s"),p.style.setProperty("--ff-delay",(30*-Math.random()).toFixed(2)+"s"),p.style.setProperty("--ff-breathe-time",(4+4*Math.random()).toFixed(2)+"s"),p.style.setProperty("--ff-size",(2.2+1.4*Math.random()).toFixed(2)+"px"),p.style.setProperty("--ff-color",u%3==0?"178, 241, 158":"255, 214, 117"),p.appendChild(h),n.appendChild(p)}r=y,t.body.appendChild(n)}n&&(n.hidden=!!d,n.setAttribute("data-paused",d?"true":"false")),f()}function u(){o="1"===s("fireflies",o?"1":"0"),y()}function p(e){l("fireflies",(o=!0===e)?"1":"0"),y()}}(window,document);
+/* 萤火虫微光：低密度 CSS 动画，无 canvas / RAF / 定时器循环。 */
+(function (w, d) {
+  'use strict';
+  if (w.FOMAL_FIREFLIES) { w.FOMAL_FIREFLIES.refresh(); return; }
+  var layer = null, count = 0, wanted = false, away = false;
+  var fallback = Object.create(null);
+  var motion = typeof w.matchMedia === 'function' ? w.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  function read(key, initial) {
+    if (Object.prototype.hasOwnProperty.call(fallback, key)) return fallback[key];
+    try { var v = w.localStorage.getItem(key); return v === null ? (key === 'fireflies' ? '0' : initial) : v; }
+    catch (error) { return initial; }
+  }
+  function write(key, value) {
+    try { w.localStorage.setItem(key, value); delete fallback[key]; }
+    catch (error) { fallback[key] = value; }
+  }
+  function remove() {
+    if (layer && layer.parentNode) layer.parentNode.removeChild(layer);
+    layer = null; count = 0;
+  }
+  function syncControls() {
+    var control = d.getElementById('firefliesSet');
+    if (control) control.checked = wanted;
+    var snowOn = !wanted && read('snow', 'none') === 'block';
+    var snowControl = d.getElementById('snowSet');
+    if (snowControl) snowControl.checked = snowOn;
+    var snow = d.getElementById('snow');
+    if (snow && snow.style.display !== (snowOn ? 'block' : 'none')) snow.style.display = snowOn ? 'block' : 'none';
+    var hint = d.getElementById('firefliesHint');
+    if (hint) hint.textContent = wanted && motion && motion.matches ? '已开启 · 减少动态效果偏好下暂停' : '下方微光 · 默认关闭 · 与雪花互斥';
+  }
+  function disableSnow() {
+    if (read('snow', 'none') === 'block') write('snow', 'none');
+    var snow = d.getElementById('snow');
+    if (snow) snow.style.display = 'none';
+    var check = d.getElementById('snowSet');
+    if (check) check.checked = false;
+  }
+  function paint() {
+    if (!wanted) { remove(); syncControls(); return; }
+    disableSnow();
+    var paused = away || d.hidden || !!(motion && motion.matches);
+    if (layer && layer.parentNode !== d.body) { layer = null; count = 0; }
+    var n = w.innerWidth <= 600 ? 8 : 14;
+    if (!paused && d.body && (!layer || count !== n)) {
+      remove();
+      layer = d.createElement('div');
+      layer.id = 'fireflies-stage';
+      layer.setAttribute('aria-hidden', 'true');
+      layer.setAttribute('role', 'presentation');
+      for (var i = 0; i < n; i++) {
+        var mote = d.createElement('span'), glow = d.createElement('i');
+        mote.className = 'ff-mote'; glow.className = 'ff-glow';
+        // 分层、错相，避免整片光点同步闪烁或横穿正文。
+        mote.style.left = (3 + i * 90 / n + Math.random() * 4) + '%';
+        mote.style.top = (12 + Math.random() * 70) + '%';
+        mote.style.setProperty('--ff-drift-time', (20 + Math.random() * 14).toFixed(2) + 's');
+        mote.style.setProperty('--ff-delay', (-Math.random() * 30).toFixed(2) + 's');
+        mote.style.setProperty('--ff-breathe-time', (4 + Math.random() * 4).toFixed(2) + 's');
+        mote.style.setProperty('--ff-size', (2.2 + Math.random() * 1.4).toFixed(2) + 'px');
+        mote.style.setProperty('--ff-color', i % 3 === 0 ? '178, 241, 158' : '255, 214, 117');
+        mote.appendChild(glow); layer.appendChild(mote);
+      }
+      count = n; d.body.appendChild(layer);
+    }
+    if (layer) { layer.hidden = !!paused; layer.setAttribute('data-paused', paused ? 'true' : 'false'); }
+    syncControls();
+  }
+  function refresh() { wanted = read('fireflies', wanted ? '1' : '0') === '1'; paint(); }
+  function setEnabled(on) { wanted = on === true; write('fireflies', wanted ? '1' : '0'); paint(); }
+  w.FOMAL_FIREFLIES = { setEnabled: setEnabled, refresh: refresh, syncControls: syncControls };
+  d.addEventListener('visibilitychange', paint);
+  d.addEventListener('pjax:complete', refresh);
+  w.addEventListener('resize', paint);
+  w.addEventListener('pagehide', function () { away = true; paint(); });
+  w.addEventListener('pageshow', function () { away = false; refresh(); });
+  w.addEventListener('storage', function (event) {
+    if (event.key !== null && event.key !== 'fireflies' && event.key !== 'snow') return;
+    if (event.key === null) fallback = Object.create(null); else delete fallback[event.key];
+    if (event.key === 'snow' && read('snow', 'none') === 'block') setEnabled(false);
+    else refresh();
+  });
+  if (motion) {
+    if (typeof motion.addEventListener === 'function') motion.addEventListener('change', paint);
+    else if (typeof motion.addListener === 'function') motion.addListener(paint);
+  }
+  if (!d.body) d.addEventListener('DOMContentLoaded', refresh, { once: true });
+  refresh();
+})(window, document);

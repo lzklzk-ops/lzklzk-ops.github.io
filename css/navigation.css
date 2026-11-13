@@ -1,1 +1,608 @@
-#page-header #nav{box-sizing:border-box;padding:0 24px!important}#nav>#blog_name{min-width:0;margin-right:8px}#nav>#blog_name>#site-name{display:block;width:fit-content;max-width:100%;overflow:visible;text-overflow:ellipsis;white-space:nowrap}#nav #name-container{top:50%!important;transform:translate(-50%,-50%)!important;line-height:1}#nav #name-container:hover{transform:translate(-50%,-50%) scale(1.03)!important}#nav #page-name{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;height:44px;min-height:44px;padding:0 16px;line-height:1}#nav #page-name::before,#nav>#blog_name>#site-name::before{display:flex;align-items:center;justify-content:center;box-sizing:border-box;top:50%!important;left:50%!important;right:auto!important;transform:translate(-50%,-50%);scale:1!important;height:40px;padding:0;line-height:1;text-shadow:none}#nav>#blog_name>#site-name::before{width:100%;max-width:100%;font-size:18px}#nav #page-name::before{width:144px;max-width:100%;font-size:16px}#nav #page-name:focus-visible::before,#nav>#blog_name>#site-name:focus-visible::before{opacity:1}#nav>#menus{flex:0 0 auto}#nav>#menus>#nav-right{display:flex;align-items:center;gap:8px}#nav #nav-right>#search-button,#nav #nav-right>#toggle-menu{flex:0 0 auto;padding:0!important;margin:0}#nav #nav-right>#meihua-button,#nav #nav-right>#nightmode-button,#nav #nav-right>#search-button>a.search,#nav #nav-right>#toggle-menu>a{box-sizing:border-box;display:flex;align-items:center;justify-content:center;flex:0 0 44px;width:44px;height:44px;min-width:44px;min-height:44px;padding:0;margin:0;border-radius:12px;line-height:1;background:0 0;transition:background-color 140ms ease,box-shadow 140ms ease}#nav #nav-right a>svg{display:block;top:0!important;vertical-align:middle;flex-shrink:0}#page-header.nav-fixed #nav,#page-header.nav-visible #nav,#page-header.not-top-img #nav{--navigation-fg:#292c30;-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(251,250,247,.96)!important;opacity:1;border-bottom:1px solid rgba(30,34,40,.08);box-shadow:0 2px 12px rgba(30,34,40,.05)}[data-theme=dark] #page-header.nav-fixed #nav,[data-theme=dark] #page-header.nav-visible #nav,[data-theme=dark] #page-header.not-top-img #nav{--navigation-fg:#eceef0;background:rgba(37,39,42,.96)!important;border-bottom-color:rgba(255,255,255,.08);box-shadow:0 2px 12px rgba(0,0,0,.14)}#page-header.nav-fixed #nav #nav-right a,#page-header.nav-fixed #nav #page-name,#page-header.nav-fixed #nav #site-name,#page-header.nav-fixed #nav .menus_items>.menus_item>a,#page-header.nav-visible #nav #nav-right a,#page-header.nav-visible #nav #page-name,#page-header.nav-visible #nav #site-name,#page-header.nav-visible #nav .menus_items>.menus_item>a,#page-header.not-top-img #nav #nav-right a,#page-header.not-top-img #nav #page-name,#page-header.not-top-img #nav #site-name,#page-header.not-top-img #nav .menus_items>.menus_item>a{color:var(--navigation-fg)!important;text-shadow:none}@media screen and (min-width:1200px) and (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){@supports ((backdrop-filter:blur(6px)) or (-webkit-backdrop-filter:blur(6px))){#page-header.nav-fixed #nav,#page-header.nav-visible #nav,#page-header.not-top-img #nav{background:rgba(251,250,247,.92)!important;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}[data-theme=dark] #page-header.nav-fixed #nav,[data-theme=dark] #page-header.nav-visible #nav,[data-theme=dark] #page-header.not-top-img #nav{background:rgba(37,39,42,.92)!important}}}#page-header.full_page:not(.nav-fixed):not(.nav-visible):not(.not-top-img) #nav{background:0 0!important;border-bottom:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}#page-header #nav #nav-right a:focus-visible,#page-header #nav #nav-right a:hover{color:var(--theme-color)!important;background:rgba(128,128,128,.1);box-shadow:inset 0 0 0 1px var(--theme-color)}@supports (background:color-mix(in srgb,red 10%,transparent)){#page-header #nav #nav-right a:focus-visible,#page-header #nav #nav-right a:hover{background:color-mix(in srgb,var(--theme-color) 12%,transparent)}}#page-header #nav .menus_items>.menus_item>a:focus-visible,#page-header #nav .menus_items>.menus_item>a:hover{color:var(--theme-color)!important}#page-header #nav a:focus-visible{outline:2px solid var(--theme-color);outline-offset:2px}#page-header #nav #page-name:focus-visible,#page-header #nav #page-name:hover,#page-header #nav>#blog_name>#site-name:focus-visible,#page-header #nav>#blog_name>#site-name:hover{color:transparent!important;text-shadow:none!important;animation:none!important}@media screen and (max-width:800px){#page-header #nav{padding:0 12px!important}#nav>#menus>#nav-right{gap:4px}#nav #name-container{display:none!important}}@media screen and (max-width:480px){#nav>#blog_name>#site-name{font-size:20px}}body.read-mode #page-header>#nav{display:none!important}@media screen and (max-width:360px){#nav>#blog_name>#site-name{overflow:hidden;animation:none!important;text-shadow:none!important}}@media (prefers-reduced-motion:reduce){#nav #page-name::before,#nav>#blog_name>#site-name,#nav>#blog_name>#site-name::before{animation:none!important;transition:none!important}#nav #nav-right a,#nav #nav-right svg{transition:none!important;animation:none!important}}
+/* Site-owned navigation polish; injected after theme CSS, no template/JS edits.
+ * Keep nav positioning, fixed-display variables and direction/title logic intact.
+ */
+#page-header #nav {
+  box-sizing: border-box;
+  padding: 0 24px !important;
+}
+
+#nav > #blog_name {
+  min-width: 0;
+  margin-right: 8px;
+}
+
+#nav > #blog_name > #site-name {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  /* Let the theme neon and home-hover halo paint outside the link. */
+  overflow: visible;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* The title used to be an inline glyph box, slightly above the nav centre. */
+#nav #name-container {
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  line-height: 1;
+}
+
+#nav #name-container:hover {
+  transform: translate(-50%, -50%) scale(1.03) !important;
+}
+
+#nav #page-name {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 44px;
+  min-height: 44px;
+  padding: 0 16px;
+  line-height: 1;
+}
+
+/* Compact hover visuals; keep link hit areas and navigation handlers intact.
+ * Centre the actual glyph box, independent of inherited heading line-height. */
+#nav > #blog_name > #site-name::before,
+#nav #page-name::before {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  top: 50% !important;
+  left: 50% !important;
+  right: auto !important;
+  transform: translate(-50%, -50%);
+  scale: 1 !important;
+  height: 40px;
+  padding: 0;
+  line-height: 1;
+  text-shadow: none;
+}
+
+#nav > #blog_name > #site-name::before {
+  width: 100%;
+  max-width: 100%;
+  font-size: 18px;
+}
+
+#nav #page-name::before {
+  width: 144px;
+  max-width: 100%;
+  font-size: 16px;
+}
+
+#nav > #blog_name > #site-name:focus-visible::before,
+#nav #page-name:focus-visible::before {
+  opacity: 1;
+}
+
+/* Do not position #menus: absolute centre menus/title use #nav as their anchor. */
+#nav > #menus {
+  flex: 0 0 auto;
+}
+
+#nav > #menus > #nav-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#nav #nav-right > #search-button,
+#nav #nav-right > #toggle-menu {
+  flex: 0 0 auto;
+  padding: 0 !important;
+  margin: 0;
+}
+
+/* Only the anchor is flex; the theme still hides/shows the hamburger wrapper. */
+#nav #nav-right > #search-button > a.search,
+#nav #nav-right > #meihua-button,
+#nav #nav-right > #nightmode-button,
+#nav #nav-right > #toggle-menu > a {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  margin: 0;
+  border-radius: 12px;
+  line-height: 1;
+  background: transparent;
+  transition: background-color 140ms ease, box-shadow 140ms ease;
+}
+
+#nav #nav-right a > svg {
+  display: block;
+  top: 0 !important;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* Solid-enough fallback: background alpha, not whole-nav opacity. */
+#page-header.nav-fixed #nav,
+#page-header.nav-visible #nav,
+#page-header.not-top-img #nav {
+  --navigation-fg: #292c30;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  background: rgba(251, 250, 247, 0.96) !important;
+  opacity: 1;
+  border-bottom: 1px solid rgba(30, 34, 40, 0.08);
+  box-shadow: 0 2px 12px rgba(30, 34, 40, 0.05);
+}
+
+[data-theme="dark"] #page-header.nav-fixed #nav,
+[data-theme="dark"] #page-header.nav-visible #nav,
+[data-theme="dark"] #page-header.not-top-img #nav {
+  --navigation-fg: #eceef0;
+  background: rgba(37, 39, 42, 0.96) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.14);
+}
+
+#page-header.nav-fixed #nav #site-name,
+#page-header.nav-visible #nav #site-name,
+#page-header.not-top-img #nav #site-name,
+#page-header.nav-fixed #nav .menus_items > .menus_item > a,
+#page-header.nav-visible #nav .menus_items > .menus_item > a,
+#page-header.not-top-img #nav .menus_items > .menus_item > a,
+#page-header.nav-fixed #nav #page-name,
+#page-header.nav-visible #nav #page-name,
+#page-header.not-top-img #nav #page-name,
+#page-header.nav-fixed #nav #nav-right a,
+#page-header.nav-visible #nav #nav-right a,
+#page-header.not-top-img #nav #nav-right a {
+  color: var(--navigation-fg) !important;
+  text-shadow: none;
+}
+
+/* Static CSS eligibility, not a GPU-performance detector; no new scroll listeners. */
+@media screen and (min-width: 1200px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  @supports ((backdrop-filter: blur(6px)) or (-webkit-backdrop-filter: blur(6px))) {
+    #page-header.nav-fixed #nav,
+    #page-header.nav-visible #nav,
+    #page-header.not-top-img #nav {
+      background: rgba(251, 250, 247, 0.92) !important;
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+    }
+
+    [data-theme="dark"] #page-header.nav-fixed #nav,
+    [data-theme="dark"] #page-header.nav-visible #nav,
+    [data-theme="dark"] #page-header.not-top-img #nav {
+      background: rgba(37, 39, 42, 0.92) !important;
+    }
+  }
+}
+
+/* Hero only: the theme's existing scroll classes decide when the surface appears. */
+#page-header.full_page:not(.nav-fixed):not(.nav-visible):not(.not-top-img) #nav {
+  background: transparent !important;
+  border-bottom: 0;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+#page-header #nav #nav-right a:hover,
+#page-header #nav #nav-right a:focus-visible {
+  color: var(--theme-color) !important;
+  background: rgba(128, 128, 128, 0.1);
+  box-shadow: inset 0 0 0 1px var(--theme-color);
+}
+
+@supports (background: color-mix(in srgb, red 10%, transparent)) {
+  #page-header #nav #nav-right a:hover,
+  #page-header #nav #nav-right a:focus-visible {
+    background: color-mix(in srgb, var(--theme-color) 12%, transparent);
+  }
+}
+
+#page-header #nav .menus_items > .menus_item > a:hover,
+#page-header #nav .menus_items > .menus_item > a:focus-visible {
+  color: var(--theme-color) !important;
+}
+
+#page-header #nav a:focus-visible {
+  outline: 2px solid var(--theme-color);
+  outline-offset: 2px;
+}
+
+/* Hide the original label only while its compact replacement is visible. */
+#page-header #nav > #blog_name > #site-name:hover,
+#page-header #nav > #blog_name > #site-name:focus-visible,
+#page-header #nav #page-name:hover,
+#page-header #nav #page-name:focus-visible {
+  color: transparent !important;
+  text-shadow: none !important;
+  animation: none !important;
+}
+
+@media screen and (max-width: 800px) {
+  #page-header #nav {
+    padding: 0 12px !important;
+  }
+
+  #nav > #menus > #nav-right {
+    gap: 4px;
+  }
+
+  /* Match the theme JS's 800px collapse, not its older 768px title breakpoint. */
+  #nav #name-container {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #nav > #blog_name > #site-name {
+    font-size: 20px;
+  }
+}
+
+/* Fixed-nav display rules otherwise outrank the theme's reading-mode hide. */
+body.read-mode #page-header > #nav {
+  display: none !important;
+}
+
+/* At 320px the brand slot is only 100px: clipping is intentional here,
+ * but a quiet label avoids turning its animated glow into a hard-edged block. */
+@media screen and (max-width: 360px) {
+  #nav > #blog_name > #site-name {
+    overflow: hidden;
+    animation: none !important;
+    text-shadow: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #nav > #blog_name > #site-name,
+  #nav > #blog_name > #site-name::before,
+  #nav #page-name::before {
+    animation: none !important;
+    transition: none !important;
+  }
+  #nav #nav-right a,
+  #nav #nav-right svg {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* 分开式一级导航：只调整外观，保留主题的链接、下拉和移动端逻辑。 */
+#page-header #nav > #menus {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#page-header #nav > #menus > .menus_items {
+  position: static !important;
+  left: auto !important;
+  width: auto !important;
+  max-width: 100%;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transform: none !important;
+}
+
+#page-header #nav .menus_items > .menus_item {
+  display: block;
+  padding: 0 !important;
+}
+
+#page-header #nav .menus_items > .menus_item > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  box-sizing: border-box;
+  min-height: 42px;
+  padding: 0 12px 2px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  text-shadow: none;
+  white-space: nowrap;
+  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+#page-header #nav .menus_items > .menus_item > a::after {
+  left: 12px;
+  right: 12px;
+  bottom: 4px;
+  width: auto;
+  height: 2px;
+  border-radius: 999px;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 160ms ease;
+}
+
+#page-header #nav .menus_items > .menus_item > a:hover,
+#page-header #nav .menus_items > .menus_item > a:focus-visible,
+#page-header #nav .menus_items > .menus_item > a.group:hover {
+  color: var(--theme-color) !important;
+  background: rgba(128, 128, 128, 0.1);
+  border-color: rgba(128, 128, 128, 0.24);
+  transform: translateY(-1px);
+}
+
+@supports (background: color-mix(in srgb, red 10%, transparent)) {
+  #page-header #nav .menus_items > .menus_item > a:hover,
+  #page-header #nav .menus_items > .menus_item > a:focus-visible,
+  #page-header #nav .menus_items > .menus_item > a.group:hover {
+  background: color-mix(in srgb, var(--theme-color) 10%, transparent);
+  border-color: color-mix(in srgb, var(--theme-color) 28%, transparent);
+  }
+}
+
+#page-header #nav .menus_items > .menus_item > a:hover::after,
+#page-header #nav .menus_items > .menus_item > a:focus-visible::after,
+#page-header #nav .menus_items > .menus_item > a.group:hover::after {
+  transform: scaleX(1);
+}
+
+#page-header #nav .menus_items > .menus_item > a > .menu_icon,
+#page-header #nav .menus_items > .menus_item > a > i:first-child {
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+#page-header #nav .menus_items > .menus_item > a > .menu_word {
+  margin: 0;
+  line-height: 1;
+}
+
+#page-header #nav .menus_items > .menus_item > a.group > i:last-child {
+  margin-left: 2px;
+  padding: 0;
+  font-size: 10px;
+}
+
+#page-header #nav .menus_items > .menus_item > a.hide > i:last-child {
+  display: none;
+}
+
+#page-header #nav .menus_item_child {
+  display: none;
+  top: calc(100% + 8px);
+  right: auto;
+  left: 50%;
+  width: max-content;
+  min-width: 148px;
+  padding: 6px !important;
+  border: 1px solid rgba(128, 128, 128, 0.2);
+  border-radius: 10px !important;
+}
+
+@supports (border-color: color-mix(in srgb, red 10%, transparent)) {
+  #page-header #nav .menus_item_child {
+  border: 1px solid color-mix(in srgb, var(--theme-color) 18%, var(--card-bg));
+  }
+}
+
+#page-header #nav .menus_item_child li,
+#page-header #nav .menus_item_child li:first-child,
+#page-header #nav .menus_item_child li:last-child {
+  border-radius: 7px !important;
+}
+
+#page-header #nav .menus_item_child .site-page.child {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  border-radius: 7px;
+  white-space: nowrap;
+}
+
+/* Keep submenu rows vertical and readable; the legacy theme used a horizontal flex row. */
+#page-header #nav .menus_items > .menus_item:hover .menus_item_child {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch;
+  gap: 4px;
+}
+
+#page-header #nav .menus_item_child li {
+  display: block !important;
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+@media screen and (max-width: 1100px) {
+  #page-header #nav .menus_items {
+    gap: 3px;
+  }
+
+  #page-header #nav .menus_items > .menus_item > a {
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  #page-header #nav > #menus {
+    justify-content: flex-end;
+  }
+
+  #page-header #nav > #menus > .menus_items {
+    display: none !important;
+  }
+}
+
+/* 截图风格的深色平铺导航：只改变导航外观，不改变链接地址或主题脚本。 */
+#page-header #nav,
+#page-header.nav-fixed #nav,
+#page-header.nav-visible #nav,
+#page-header.not-top-img #nav {
+  --navigation-fg: #e7edf7;
+  --navigation-muted: #91a0b5;
+  min-height: 64px;
+  background: linear-gradient(90deg, rgba(20, 31, 43, 0.94), rgba(29, 43, 65, 0.9)) !important;
+  border-bottom: 1px solid rgba(196, 219, 245, 0.14);
+  box-shadow: 0 8px 24px rgba(6, 13, 24, 0.2);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+  backdrop-filter: blur(14px) saturate(120%);
+}
+
+[data-theme="dark"] #page-header #nav,
+[data-theme="dark"] #page-header.nav-fixed #nav,
+[data-theme="dark"] #page-header.nav-visible #nav,
+[data-theme="dark"] #page-header.not-top-img #nav {
+  background: linear-gradient(90deg, rgba(10, 18, 30, 0.95), rgba(20, 31, 51, 0.93)) !important;
+  border-bottom-color: rgba(196, 219, 245, 0.12);
+}
+
+#page-header #nav > #blog_name {
+  flex: 0 0 auto;
+  margin-right: clamp(14px, 2vw, 32px);
+}
+
+#page-header #nav > #blog_name > #site-name,
+#page-header #nav #nav-right a,
+#page-header #nav .menus_items > .menus_item > a {
+  color: var(--navigation-fg) !important;
+  text-shadow: none !important;
+}
+
+#page-header #nav > #menus {
+  justify-content: flex-start;
+}
+
+#page-header #nav > #menus > .menus_items {
+  justify-content: flex-start;
+  gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+#page-header #nav > #menus > .menus_items::-webkit-scrollbar {
+  display: none;
+}
+
+#page-header #nav .menus_items > .menus_item > a {
+  position: relative;
+  min-height: 64px;
+  padding: 0 11px;
+  border: 0;
+  border-radius: 0;
+  color: var(--navigation-muted) !important;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 160ms ease, background-color 160ms ease;
+}
+
+#page-header #nav .menus_items > .menus_item > a::after {
+  left: 50%;
+  right: auto;
+  bottom: 8px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #16a9f5;
+  transform: translateX(-50%) scale(0);
+  box-shadow: 0 0 10px rgba(22, 169, 245, 0.8);
+}
+
+#page-header #nav .menus_items > .menus_item > a:hover,
+#page-header #nav .menus_items > .menus_item > a:focus-visible,
+#page-header #nav .menus_items > .menus_item > a.active {
+  color: #f2f7ff !important;
+  background: rgba(84, 126, 170, 0.14);
+}
+
+#page-header #nav .menus_items > .menus_item > a:hover::after,
+#page-header #nav .menus_items > .menus_item > a:focus-visible::after,
+#page-header #nav .menus_items > .menus_item > a.active::after {
+  transform: translateX(-50%) scale(1);
+}
+
+#page-header #nav .menus_items > .menus_item > a > .menu_icon,
+#page-header #nav .menus_items > .menus_item > a > i:first-child {
+  color: currentColor;
+}
+
+#page-header #nav #nav-right {
+  margin-left: auto;
+  padding-left: 10px;
+  background: linear-gradient(90deg, transparent, rgba(20, 31, 43, 0.88) 18%);
+}
+
+#page-header #nav #nav-right a:hover,
+#page-header #nav #nav-right a:focus-visible {
+  color: #f2f7ff !important;
+  background: rgba(84, 126, 170, 0.2);
+  box-shadow: none;
+}
+
+@media screen and (max-width: 1100px) {
+  #page-header #nav .menus_items > .menus_item > a {
+    padding-right: 8px;
+    padding-left: 8px;
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  #page-header #nav,
+  #page-header.nav-fixed #nav,
+  #page-header.nav-visible #nav,
+  #page-header.not-top-img #nav {
+    min-height: 56px;
+  }
+
+  #page-header #nav #nav-right {
+    padding-left: 2px;
+    background: none;
+  }
+}
+
+/* 首页大图顶部也保持截图中的深色导航，不让主题的透明规则覆盖它。 */
+#page-header.full_page:not(.nav-fixed):not(.nav-visible):not(.not-top-img) #nav {
+  background: linear-gradient(90deg, rgba(20, 31, 43, 0.94), rgba(29, 43, 65, 0.9)) !important;
+  border-bottom: 1px solid rgba(196, 219, 245, 0.14);
+  box-shadow: 0 8px 24px rgba(6, 13, 24, 0.2);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+  backdrop-filter: blur(14px) saturate(120%);
+}
+
+[data-theme="dark"] #page-header.full_page:not(.nav-fixed):not(.nav-visible):not(.not-top-img) #nav {
+  background: linear-gradient(90deg, rgba(10, 18, 30, 0.95), rgba(20, 31, 51, 0.93)) !important;
+}
+
+/* Keep the primary menu centered in the available space between brand and tools. */
+@media screen and (min-width: 801px) {
+  #page-header #nav > #menus {
+    position: static;
+    left: auto;
+    width: auto;
+    max-width: none;
+    justify-content: flex-end;
+    transform: none;
+  }
+
+  #page-header #nav > #menus > .menus_items {
+    position: absolute;
+    left: 50%;
+    width: max-content;
+    max-width: calc(100% - 380px);
+    justify-content: center;
+    margin-inline: auto;
+    transform: translateX(-50%);
+  }
+
+  #page-header #nav > #blog_name { margin-right: 0; }
+}

@@ -172,6 +172,9 @@ background: linear-gradient(135deg, color-mix(in srgb, var(--anno-accent) 88%, v
 /* 欢迎信息块：改成左对齐的「小标签 + 正文」，并让 fomal.js 写死的内联蓝色跟随主题色 */
 .card-widget.card-announcement #welcome-info { background: var(--anno-soft-bg); border: 1px solid var(--anno-soft-bd);
   border-radius: 14px; padding: 10px 13px; margin-top: 0; text-align: left; font-weight: 500; line-height: 1.9; font-size: 13.5px; }
+/* 公告栏正文在 _config.fomalhaut.yml 的 aside.card_announcement.content 中编辑。 */
+/* 欢迎信息接口失败时只隐藏提示框；公告正文和编辑入口保持不变。 */
+.card-widget.card-announcement #welcome-info[data-welcome-state="error"] { display: none; }
 .card-widget.card-announcement #welcome-info b { font-weight: 500; }
 .card-widget.card-announcement #welcome-info center { text-align: left; margin: 0 0 2px; font-size: 12px;
   letter-spacing: .5px; color: var(--anno-muted); font-weight: 700; }
@@ -1061,7 +1064,174 @@ html[data-theme="dark"] #fps {
 #aplayer-tao-playlist .aplayer-info .aplayer-music .aplayer-title { font-weight: 800; }
 .music-note-tag { background: var(--anime-orange) !important; color: #fff !important; }
 .music-note-quote { border-left-color: var(--anime-orange) !important; }
+
+/* 页脚不再整体隐藏；原整体隐藏规则保留为注释。 */
+/* #footer-wrap { display: none !important; } */
+
 @media (max-width: 600px) {
   #page-header { background-position: 64% center !important; }
   .music-setup-tip { font-size: .84em; }
+}
+
+/* 八音盒唱片机布局：保留 APlayer/Meting 的音频与控制逻辑，只重排播放器界面。 */
+#article-container #aplayer-tao-playlist.aplayer {
+  --aplayer-bg: rgba(36, 53, 69, .64);
+  display: block;
+  max-width: 1120px;
+  min-height: 450px;
+  margin: 20px auto 28px;
+  padding: 30px 36px;
+  overflow: hidden;
+  border: 1px solid rgba(190, 215, 239, .12) !important;
+  border-radius: 26px;
+  color: #e5ebf6;
+  background: linear-gradient(115deg, rgba(36, 53, 69, .64), rgba(39, 40, 54, .58)) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(125%);
+  backdrop-filter: blur(18px) saturate(125%);
+  box-shadow: 0 18px 50px rgba(10, 17, 30, .22);
+}
+
+#article-container #aplayer-tao-playlist .aplayer-body {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  grid-template-rows: minmax(320px, auto) auto;
+  align-items: center;
+  gap: 18px;
+  padding: 0;
+}
+
+#article-container #aplayer-tao-playlist .aplayer-pic {
+  grid-column: 1;
+  grid-row: 1;
+  width: 264px !important;
+  height: 264px !important;
+  margin: auto;
+  overflow: visible;
+  border: 0 !important;
+  border-radius: 50% !important;
+  background-color: #fff;
+  box-shadow: 0 0 0 1px rgba(185, 207, 236, .16), inset 0 0 0 1px rgba(255,255,255,.16);
+}
+
+#article-container #aplayer-tao-playlist .aplayer-pic::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(195, 211, 236, .12);
+  border-radius: 50%;
+  box-shadow: 0 0 0 14px rgba(195, 211, 236, .035), 0 0 0 28px rgba(195, 211, 236, .035);
+  pointer-events: none;
+}
+
+#article-container #aplayer-tao-playlist.aplayer.aplayer-withlist .aplayer-pic {
+  height: 264px !important;
+}
+
+#article-container #aplayer-tao-playlist .aplayer-pic .aplayer-button {
+  z-index: 2;
+  background: #655cff !important;
+  box-shadow: 0 8px 20px rgba(76, 70, 255, .3);
+}
+
+#article-container #aplayer-tao-playlist .aplayer-info {
+  grid-column: 2;
+  grid-row: 1;
+  width: 100%;
+  min-width: 0;
+  height: auto !important;
+  padding: 0 0 8px !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+#article-container #aplayer-tao-playlist .aplayer-info .aplayer-music {
+  height: auto;
+  margin: 0 0 16px;
+}
+
+#article-container #aplayer-tao-playlist .aplayer-info .aplayer-music .aplayer-title {
+  color: #f1f4fb;
+  font-size: 22px;
+}
+
+#article-container #aplayer-tao-playlist .aplayer-info .aplayer-music .aplayer-author {
+  color: #b6c0d0 !important;
+  font-size: 14px;
+}
+
+#article-container #aplayer-tao-playlist .aplayer-info .aplayer-controller .aplayer-bar-wrap {
+  margin: 0 0 12px;
+}
+
+#article-container #aplayer-tao-playlist .aplayer-info .aplayer-controller .aplayer-bar {
+  background: rgba(158, 179, 208, .2);
+}
+
+#article-container #aplayer-tao-playlist .aplayer-info .aplayer-controller .aplayer-played,
+#article-container #aplayer-tao-playlist .aplayer-info .aplayer-controller .aplayer-thumb {
+  background: #655cff !important;
+}
+
+#article-container #aplayer-tao-playlist .aplayer-info .aplayer-controller .aplayer-time,
+#article-container #aplayer-tao-playlist .aplayer-info .aplayer-info {
+  color: #c7d0df;
+}
+
+#article-container #aplayer-tao-playlist .aplayer-lrc {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  height: 260px !important;
+  margin: 0;
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: rgba(17, 27, 43, .38);
+  border: 1px solid rgba(190, 215, 239, .08) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+  backdrop-filter: blur(14px) saturate(120%);
+}
+
+#article-container #aplayer-tao-playlist .aplayer-lrc::before,
+#article-container #aplayer-tao-playlist .aplayer-lrc::after {
+  background: linear-gradient(180deg, var(--aplayer-bg), transparent) !important;
+}
+
+#article-container #aplayer-tao-playlist .aplayer-lrc::after {
+  background: linear-gradient(180deg, transparent, var(--aplayer-bg)) !important;
+}
+
+#article-container #aplayer-tao-playlist .aplayer-lrc p {
+  color: #c8d2e2;
+  font-size: 16px;
+  line-height: 2.15;
+}
+
+#article-container #aplayer-tao-playlist .aplayer-list {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  border: 0;
+  background: rgba(17, 27, 43, .32);
+}
+
+@media (max-width: 680px) {
+  #article-container #aplayer-tao-playlist.aplayer {
+    min-height: 0;
+    padding: 24px 18px;
+    border-radius: 20px;
+  }
+  #article-container #aplayer-tao-playlist .aplayer-body {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 14px;
+  }
+  #article-container #aplayer-tao-playlist .aplayer-pic {
+    grid-column: 1;
+    grid-row: 1;
+    width: 180px !important;
+    height: 180px !important;
+  }
+  #article-container #aplayer-tao-playlist.aplayer.aplayer-withlist .aplayer-pic { height: 180px !important; }
+  #article-container #aplayer-tao-playlist .aplayer-info { grid-column: 1; grid-row: 2; }
+  #article-container #aplayer-tao-playlist .aplayer-lrc,
+  #article-container #aplayer-tao-playlist .aplayer-list { grid-row: 3; }
+  #article-container #aplayer-tao-playlist .aplayer-lrc { height: 240px !important; }
 }
